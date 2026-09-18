@@ -1,13 +1,15 @@
 import json
-from kafka import KafkaProducer
+from confluent_kafka import Producer
 
-producer = KafkaProducer(
-    bootstrap_servers="localhost:9092",
-    value_serializer=lambda v: json.dumps(v, default=str).encode("utf-8"),
-    api_version=(2, 5, 0),
-)
+producer = Producer({'bootstrap.servers': 'localhost:9092'})
 
-TOPIC = "order_events"
+TOPIC = "orders-events"
+
+def delivery_report(err, msg):
+    if err is not None:
+        print(f"Kafka delivery FAILED: {err}")
+    else:
+        print(f"Delivered to {msg.topic()} [{msg.partition()}] offset{msg.offset()}")
 
 def publish_event(op_type: str, table_name: str, payload: dict):
     event = {
@@ -16,11 +18,9 @@ def publish_event(op_type: str, table_name: str, payload: dict):
         "event_timestamp": payload.get("event_timestamp"),
         "payload": payload,
     }
-    future = producer.send(TOPIC, value=event)
-    try:
-        record_metadata = future.get(timeout=10)
-        print(f"Delivered to {record_metadata.topic} partition {record_metadata.partition}offset {record_metadata.offset}")
-    except Exception as e:
-        print(f"Kafka delivery FAILED: {e}")
-    
-    producer.flush()
+    producer.produce(
+        TOPIC,
+        value=json.dumps(event, default=str).encode("utf-8"),
+        callback=delivery_report,
+    )
+    producer.flush(10)
