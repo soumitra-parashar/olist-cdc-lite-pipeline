@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 
 spark = (
     SparkSession.builder
-    .appName("orders-events-reader")
+    .appName("order-events-reader")
     .master("local[*]")
     .config("spark.driver.memory", "2g")
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0")
@@ -15,7 +15,7 @@ df = (
     spark.readStream
     .format("kafka")
     .option("kafka.bootstrap.servers", "localhost:9092")
-    .option("subscribe", "orders-events")
+    .option("subscribe", "order-events")
     .option("startingOffsets", "earliest")
     .load()
 )
