@@ -1,0 +1,5 @@
+.env
+logs/
+*.duckdb
+*.duckdb.wal
+config/*.cfg

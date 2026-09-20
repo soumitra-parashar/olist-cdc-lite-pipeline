@@ -1,0 +1,17 @@
+dbt_project:
+  outputs:
+    dev:
+      type: duckdb
+      path: /opt/airflow/dbt_project/dev.duckdb
+      threads: 1
+      extensions:
+        - delta
+
+    prod:
+      type: duckdb
+      path: /opt/airflow/dbt_project/prod.duckdb
+      threads: 4
+      extensions:
+        - delta
+
+  target: dev
