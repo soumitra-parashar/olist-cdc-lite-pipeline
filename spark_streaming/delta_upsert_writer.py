@@ -1,3 +1,4 @@
+import os
 from pyspark.sql import SparkSession, Window
 from pyspark.sql.functions import col, from_json, to_timestamp, last, row_number
 from pyspark.sql.types import StructType, StructField, StringType
@@ -21,8 +22,9 @@ spark = configure_spark_with_delta_pip(
 
 spark.sparkContext.setLogLevel("WARN")
 
-DELTA_PATH = "delta/orders_silver"
-CHECKPOINT_PATH = "checkpoints/orders_merge"
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DELTA_PATH = os.path.join(REPO_ROOT, "delta", "orders_silver")
+CHECKPOINT_PATH = os.path.join(REPO_ROOT, "checkpoints", "order_merge")
 
 UPDATE_COLS = [
     "customer_id", "order_status", "order_purchase_timestamp",

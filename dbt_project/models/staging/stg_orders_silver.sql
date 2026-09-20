@@ -1,0 +1,1 @@
+select * from delta_scan('/workspaces/olist-cdc-lite-pipeline/delta/orders_silver')

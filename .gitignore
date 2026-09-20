@@ -229,3 +229,11 @@ loading_temp.txt
 spark_streaming/checkpoints/
 spark_streaming/delta/
 data/
+dbt_project/dbt_packages/
+dbt_project/dbt_packages/
+/checkpoints/
+dbt_project/dev.duckdb
+dbt_project/prod.duckdb
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/dbt_logs/
