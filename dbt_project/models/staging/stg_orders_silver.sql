@@ -1,1 +1,1 @@
-select * from delta_scan('/workspaces/olist-cdc-lite-pipeline/delta/orders_silver')
+select * from delta_scan('{{ env_var("DELTA_ORDERS_SILVER_PATH", "/workspaces/olist-cdc-lite-pipeline/delta/orders_silver") }}')
