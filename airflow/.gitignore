@@ -3,3 +3,4 @@ logs/
 *.duckdb
 *.duckdb.wal
 config/*.cfg
+dbt_profile/.user.yml
