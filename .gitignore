@@ -223,14 +223,9 @@ __marimo__/
 .env
 *.db
 /delta
-delta_test.py
-test2.py
-loading_temp.txt
 spark_streaming/checkpoints/
 spark_streaming/delta/
 data/
-dbt_project/dbt_packages/
-dbt_project/dbt_packages/
 /checkpoints/
 dbt_project/dev.duckdb
 dbt_project/prod.duckdb
