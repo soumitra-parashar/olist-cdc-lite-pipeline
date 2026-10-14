@@ -13,3 +13,6 @@ six==1.17.0
 SQLAlchemy==2.0.54
 typing_extensions==4.16.0
 zipp==4.1.0
+dbt-core==1.12.5
+dbt-duckdb==1.11.0
+cryptography==50.0.2
