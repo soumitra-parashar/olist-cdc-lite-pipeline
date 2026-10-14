@@ -48,7 +48,7 @@ Python event generator (SQLAlchemy) → dual-writes to Postgres (OLTP Source)
 | Transport| Kafka (Redpanda) | Holds order events on the `order-events` topic |
 | Streaming ingest | Spark Structured Streaming | Reads from Kafka, parses JSON into columns, upserts into Delta with 'MERGE INTO' |
 | Storage | Delta Lake | 'orders_silver', holding the latest state of each order |
-| Transformation | abt (dbt-duckdb) | Staging model over the Delta table, plus an SCD Type 2 snapshot |
+| Transformation | dbt (dbt-duckdb) | Staging model over the Delta table, plus an SCD Type 2 snapshot |
 | Orchestration | Airflow 3 (LocalExecutor) | Runs `dbt run` then `dbt snapshot` |
 
 ## Target Tables
